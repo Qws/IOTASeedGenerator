@@ -63,7 +63,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Margin="-2,10,0,0" Style="{StaticResource DonationButtonStyle}" Name="DonationButton" Foreground="White" Height="75" Width="75" FontWeight="Bold" Click="DonationButton_Click">\(^_^)/</Button>
+            <!--<Button Grid.Row="0" Margin="-2,10,0,0" Style="{StaticResource DonationButtonStyle}" Name="DonationButton" Foreground="White" Height="75" Width="75" FontWeight="Bold" Click="DonationButton_Click">lol temp</Button>-->
             <TextBlock Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">IOTA Seed Generator</TextBlock>
             <Grid Name="DonationGrid" Opacity="0" Grid.Row="1" Margin="5, 5, 5, 5">
                 <Grid.RowDefinitions>
