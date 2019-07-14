@@ -7,7 +7,95 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonGenerateStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Name="FadeInOutTapCopy">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SeedText">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.4"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Name="TapToCopyFadeInEntrance">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SeedDescription">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            <Storyboard x:Name="GenerateButtonMouseEnterChangeColor">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="GenerateSeed">
+                    <EasingColorKeyFrame KeyTime="0" Value="#FF004745"/>
+                    <EasingColorKeyFrame KeyTime="0:0:1" Value="#FF0B8E8A"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="GenerateSeed">
+                    <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+        
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-52.595"/>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF065A48" Offset="0"/>
+                <GradientStop Color="#FF27EAC1" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Margin="-2,10,0,0" Style="{StaticResource DonationButtonStyle}" Name="DonationButton" Foreground="White" Height="75" Width="75" FontWeight="Bold" Click="DonationButton_Click">\(^_^)/</Button>
+            <TextBlock Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">IOTA Seed Generator</TextBlock>
+            <Grid Name="DonationGrid" Opacity="0" Grid.Row="1" Margin="5, 5, 5, 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Foreground="White" Name="DonationMessage" TextWrapping="Wrap" Margin="0, 0, 0, 5" Text="Love this app? Please donate some IOTAs to: "></TextBlock>
+                <TextBlock Grid.Row="1" Foreground="White" Margin="0,0,0,0" TextWrapping="Wrap">KDSYVZXRAHLVNENHNRUAINDVBODCGFIEGWJRZQTNJIBZMV9MBHRGIGHKKHEEOXPJUHHIETJZQBWIYCQSCXIMXAVFEC</TextBlock>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-56.768"/>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF033736" Offset="0"/>
+                    <GradientStop Color="#FF0C6764" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Name="SeedDescription" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Foreground="White" Grid.Row="0"> Tap to copy your seed:</TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Name="SeedText" Foreground="White" Grid.Row="1" FontSize="20" Tapped="SeedText_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,5,0">
+                Size of the seed is 81 characters long, and contains random characters of A-Z and the number 9.
+            </TextBlock>
+        </Grid>
+        <Button Style="{StaticResource ButtonGenerateStyle}" Name="GenerateSeed" Foreground="White" HorizontalAlignment="Center" FontSize="30" Content="Generate" Grid.Column="0" Grid.Row="2" Height="150" Width="500" Click="GenerateSeed_Click" PointerEntered="GenerateSeed_PointerEntered" PointerExited="GenerateSeed_PointerExited"></Button>
 
     </Grid>
 </Page>

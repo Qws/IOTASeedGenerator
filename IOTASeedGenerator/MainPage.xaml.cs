@@ -20,11 +20,61 @@ namespace IOTASeedGenerator
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+
     public sealed partial class MainPage : Page
     {
+        bool showDonationAddress;
+        bool seedDescriptionCreated = false;
+        Generator generator = new Generator();
+        Seed generatedSeed = new Seed();
         public MainPage()
         {
             this.InitializeComponent();
+            showDonationAddress = false;
+            SeedDescription.Opacity = 0;
+
+        }
+
+        private void GenerateSeed_Click(object sender, RoutedEventArgs e)
+        {
+
+            generatedSeed = generator.CreateSeed();
+            SeedText.Text = generatedSeed.Value;
+            if(seedDescriptionCreated == false)
+            {
+                TapToCopyFadeInEntrance.Begin();
+                seedDescriptionCreated = true;
+            }
+        }
+
+        private void SeedText_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ClipboardHandler ch = new ClipboardHandler();
+            ch.SetClipboard(generatedSeed);
+            FadeInOutTapCopy.Begin();
+        }
+
+        private void GenerateSeed_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+        }
+
+        private void GenerateSeed_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+        }
+
+        private void DonationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(showDonationAddress == false)
+            {
+                showDonationAddress = true;
+                DonationGrid.Opacity = 100;
+            }
+
+            else
+            {
+                showDonationAddress = false;
+                DonationGrid.Opacity = 0;
+            }
         }
     }
 }
